@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function App() {
 
   return (
@@ -39,7 +41,13 @@ function App() {
           <p className='font-bold'><span className='text-green-500'>denzuqo@root:</span><span className='text-amber-200'>~</span>$ sudo ./social_media</p>
 
           <div className='pt-2'>
-            <a href='https://x.com/denzuqo' target='_blink'>X (Twitter)</a><span className='pl-3 pr-3'>|</span><a href='https://warpcast.com/denzuqo' target='_blink'>Warpcast</a> 
+            <a href='https://x.com/denzuqo' target='_blink' className='underline'>X (Twitter)</a><span className='pl-3 pr-3'>|</span><a href='https://warpcast.com/denzuqo' target='_blink' className='underline'>Warpcast</a> 
+          </div>
+
+          <div className='pt-5'></div>
+          <p className='font-bold'><span className='text-green-500'>denzuqo@root:</span><span className='text-amber-200'>~</span>$ sudo ./Tools</p>
+          <div className='pt-2'>
+            <Link to='/tools/aes' className='underline'>AES</Link> 
           </div>
 
           <div className='pt-5'></div>
