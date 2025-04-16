@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function App() {
 
@@ -71,7 +71,7 @@ function App() {
           <p className='font-bold'><span className='text-green-500'>denzuqo@root:</span><span className='text-amber-200'>~</span>$<span className='pl-1 blink-text'>|</span></p>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
