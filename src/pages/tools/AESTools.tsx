@@ -59,6 +59,21 @@ function AESTools() {
     }
   };
 
+  const handleDownload = () => {
+    const content = document.getElementById('output')?.innerText;
+    if (!content) return;
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `AES_${mode.toLowerCase()}_result.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <>
       <div className='container justify-end text-white text-left p-5 lg:w-1/2'>
@@ -134,12 +149,20 @@ function AESTools() {
               <div className='mt-4 border-1 border-white'>
                 <div className='p-3 flex justify-between items-center border-b border-white'>
                   <p className='font-bold'>Result</p>
-                  <button
-                    onClick={handleCopy}
-                    className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
-                  >
-                    Copy
-                  </button>
+                  <div className='flex gap-2'>
+                    <button
+                      onClick={handleCopy}
+                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
+                    >
+                      Copy
+                    </button>
+                    <button
+                      onClick={handleDownload}
+                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
+                    >
+                      Download .txt
+                    </button>
+                  </div>
                 </div>
                 <div className='bg-gray-800'>
                   <p className='p-3 text-green-400 break-all whitespace-pre-wrap' id='output'>{output}</p>
