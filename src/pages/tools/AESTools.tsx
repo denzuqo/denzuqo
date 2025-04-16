@@ -78,7 +78,7 @@ function AESTools() {
     <>
       <div className='container justify-end text-white text-left p-5 lg:w-1/2'>
         <p className='font-bold'>
-          <span className='text-green-500'>user@root:</span>
+          <span className='text-green-500'>denzuqo@root:</span>
           <span className='text-amber-200'>~</span>$ sudo ./Tool_AES
         </p>
         <p className='font-bold'>[sudo] password for user :</p>
@@ -174,7 +174,7 @@ function AESTools() {
 
         <div className='pt-5'></div>
         <p className='font-bold'>
-          <span className='text-green-500'>user@root:</span>
+          <span className='text-green-500'>denzuqo@root:</span>
           <span className='text-amber-200'>~</span>$
           <span className='pl-1 blink-text'>|</span>
         </p>
