@@ -1,142 +1,156 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
 
-function ZoraAirdropChecker() {
-  const [wallet, setWallet] = useState("");
-  const [output, setOutput] = useState("");
+const ZoraAirdropChecker = () => {
+  const [walletAddress, setWalletAddress] = useState('');
+  const [output, setOutput] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleCheck = async () => {
-    if (!wallet) return;
+    if (!walletAddress) {
+      setError("Wallet address is required");
+      return;
+    }
+    
     setLoading(true);
-    setOutput("");
+    setError(null);  // Reset error if any
+    setOutput(null);  // Reset previous output
 
-    const query = `
-      query {
-        zoraTokenAllocation(
-          identifierWalletAddresses: ["${wallet}"],
-          zoraClaimContractEnv: PRODUCTION
-        ) {
-          totalTokensEarned {
-            totalTokens
+    const query = {
+      query: `
+        query {
+          zoraTokenAllocation(
+            identifierWalletAddresses: [
+              "${walletAddress}"
+            ],
+            zoraClaimContractEnv: "PRODUCTION"
+          ) {
+            totalTokensEarned {
+              totalTokens
+            }
           }
         }
-      }
-    `;
+      `,
+    };
 
     try {
-      const res = await fetch("/api/zora", {
+      const response = await fetch("/api/web3/airdrop/checker/zora", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ query })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(query),
       });
 
-      const json = await res.json();
-      const tokens =
-        json?.data?.zoraTokenAllocation?.totalTokensEarned?.totalTokens || "0";
-      setOutput(`Wallet : ${wallet}\nTotal Tokens Earned : ${tokens}`);
+      const data = await response.json();
+
+      if (data.errors) {
+        setError("Failed to fetch data from Zora.");
+      } else {
+        setOutput(data.data.zoraTokenAllocation.totalTokensEarned.totalTokens);
+      }
     } catch (err) {
-      console.error(err);
-      setOutput("❌ Error fetching data. Please try again.");
+      setError("An error occurred while fetching data.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(output);
+    if (output) {
+      navigator.clipboard.writeText(output);
+    }
   };
 
   const handleDownload = () => {
-    const element = document.createElement("a");
-    const file = new Blob([output], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "zora_result.txt";
-    document.body.appendChild(element);
-    element.click();
+    if (output) {
+      const blob = new Blob([output], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'zora_airdrop_result.txt';
+      link.click();
+    }
   };
 
   return (
-    <>
-      <div className='container justify-end text-white text-left p-5 lg:w-1/2'>
-        <p className='font-bold'>
-          <span className='text-green-500'>denzuqo@root:</span>
-          <span className='text-amber-200'>~</span>$ sudo ./Web3_Airdrop
-        </p>
-        <p className='font-bold'>[sudo] password for user :</p>
-        <br />
-        <p className='font-bold'>
-          <span className='text-green-500'>denzuqo@root:</span>
-          <span className='text-amber-200'>~</span>$ sudo ./Checker_Zora
-        </p>
-        <br />
+    <div className="container justify-end text-white text-left p-5 lg:w-1/2">
+      <p className="font-bold">
+        <span className="text-green-500">denzuqo@root:</span>
+        <span className="text-amber-200">~</span>$ sudo ./Web3_Airdrop
+      </p>
+      <p className="font-bold">[sudo] password for user :</p>
+      <br />
+      <p className="font-bold">
+        <span className="text-green-500">denzuqo@root:</span>
+        <span className="text-amber-200">~</span>$ sudo ./Checker_Zora
+      </p>
+      <br />
 
-        <div>
-          <div className='inline-block border-1 border-white border-b-white/0 py-1 px-2'>
-            <Link to='/' className='font-bold text-sm'>
-              <span className='text-amber-200'>&lt;</span>~ Back
-            </Link>
-          </div>
-          <div className='border-1 border-white p-3'>
-            <p className='font-bold'>*Wallet Address</p>
-            <input
-              type='text'
-              value={wallet}
-              onChange={(e) => setWallet(e.target.value)}
-              className='border-1 p-2 border-white w-full text-white bg-transparent'
-            />
+      <div>
+        <div className="inline-block border-1 border-white border-b-white/0 py-1 px-2">
+          <a href="/" className="font-bold text-sm">
+            <span className="text-amber-200">&lt;</span>~ Back
+          </a>
+        </div>
+        <div className="border-1 border-white p-3">
+          <p className="font-bold">*Wallet Address</p>
+          <input
+            type="text"
+            className="border-1 p-2 border-white w-full text-white bg-transparent"
+            value={walletAddress}
+            onChange={(e) => setWalletAddress(e.target.value)}
+          />
+          <input
+            type="button"
+            value="Check"
+            className="mt-5 p-2 bg-white text-black cursor-pointer"
+            onClick={handleCheck}
+            disabled={loading}
+          />
 
-            <input
-              type='button'
-              value={loading ? "Checking..." : "Check"}
-              onClick={handleCheck}
-              disabled={loading}
-              className='mt-5 p-2 bg-white text-black cursor-pointer disabled:opacity-50'
-            />
+          {loading && <p className="mt-4 text-white">Loading...</p>}
 
-            {output && (
-              <div className='mt-4 border-1 border-white'>
-                <div className='p-3 flex justify-between items-center border-b border-white'>
-                  <p className='font-bold'>Result</p>
-                  <div className='flex gap-2'>
-                    <button
-                      onClick={handleCopy}
-                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
-                    >
-                      Copy
-                    </button>
-                    <button
-                      onClick={handleDownload}
-                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
-                    >
-                      Download .txt
-                    </button>
-                  </div>
-                </div>
-                <div className='bg-gray-800'>
-                  <p
-                    className='p-3 text-green-400 break-all whitespace-pre-wrap'
-                    id='output'
+          {error && (
+            <div className="mt-4 border-1 border-white text-red-500">
+              <p className="p-3">{error}</p>
+            </div>
+          )}
+
+          {output && (
+            <div className="mt-4 border-1 border-white">
+              <div className="p-3 flex justify-between items-center border-b border-white">
+                <p className="font-bold">Result</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleCopy}
+                    className="text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
                   >
-                    {output}
-                  </p>
+                    Copy
+                  </button>
+                  <button
+                    onClick={handleDownload}
+                    className="text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
+                  >
+                    Download .txt
+                  </button>
                 </div>
               </div>
-            )}
-          </div>
+              <div className="bg-gray-800">
+                <p className="p-3 text-green-400 break-all whitespace-pre-wrap" id="output">
+                  {output}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
-
-        <div className='pt-28'></div>
-        <p className='font-bold'>
-          <span className='text-green-500'>denzuqo@root:</span>
-          <span className='text-amber-200'>~</span>$
-          <span className='pl-1 blink-text'>|</span>
-        </p>
       </div>
-    </>
+
+      <div className="pt-28"></div>
+      <p className="font-bold">
+        <span className="text-green-500">denzuqo@root:</span>
+        <span className="text-amber-200">~</span>$
+        <span className="pl-1 blink-text">|</span>
+      </p>
+    </div>
   );
-}
+};
 
 export default ZoraAirdropChecker;
