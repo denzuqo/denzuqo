@@ -11,41 +11,27 @@ const ZoraAirdropChecker = () => {
       setError("Wallet address is required");
       return;
     }
-    
-    setLoading(true);
-    setError(null);  // Reset error if any
-    setOutput(null);  // Reset previous output
 
-    const query = {
-      query: `
-        query {
-          zoraTokenAllocation(
-            identifierWalletAddresses: [
-              "${walletAddress}"
-            ],
-            zoraClaimContractEnv: "PRODUCTION"
-          ) {
-            totalTokensEarned {
-              totalTokens
-            }
-          }
-        }
-      `,
-    };
+    setLoading(true);
+    setError(null);
+    setOutput(null);
 
     try {
       const response = await fetch("/api/web3/airdrop/checker/zora", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(query),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ wallet: walletAddress }),
       });
 
       const data = await response.json();
 
       if (data.errors) {
-        setError("Failed to fetch data from Zora.");
+        setError(data.errors[0]?.message || "Failed to fetch data from Zora.");
       } else {
-        setOutput(data.data.zoraTokenAllocation.totalTokensEarned.totalTokens);
+        const result = data.data?.zoraTokenAllocation?.totalTokensEarned?.totalTokens;
+        setOutput(result || "0");
       }
     } catch (err) {
       setError("An error occurred while fetching data.");
