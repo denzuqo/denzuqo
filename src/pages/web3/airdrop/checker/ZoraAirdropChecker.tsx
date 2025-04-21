@@ -63,7 +63,6 @@ const ZoraAirdropChecker = () => {
         <span className="text-amber-200">~</span>$ sudo ./Web3_Airdrop
       </p>
       <p className="font-bold">[sudo] password for user :</p>
-      <br />
       <p className="font-bold">
         <span className="text-green-500">denzuqo@root:</span>
         <span className="text-amber-200">~</span>$ sudo ./Checker_Zora
