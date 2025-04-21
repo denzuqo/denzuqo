@@ -25,7 +25,7 @@ function ZoraAirdropChecker() {
     `;
 
     try {
-      const res = await fetch("https://api.zora.co/universal/graphql", {
+      const res = await fetch("/api/zora", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -103,12 +103,14 @@ function ZoraAirdropChecker() {
                   <div className='flex gap-2'>
                     <button
                       onClick={handleCopy}
-                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'>
+                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
+                    >
                       Copy
                     </button>
                     <button
                       onClick={handleDownload}
-                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'>
+                      className='text-sm bg-white text-black px-3 py-1 rounded hover:bg-gray-200'
+                    >
                       Download .txt
                     </button>
                   </div>
@@ -116,7 +118,8 @@ function ZoraAirdropChecker() {
                 <div className='bg-gray-800'>
                   <p
                     className='p-3 text-green-400 break-all whitespace-pre-wrap'
-                    id='output'>
+                    id='output'
+                  >
                     {output}
                   </p>
                 </div>

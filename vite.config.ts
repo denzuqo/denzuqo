@@ -7,4 +7,13 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    proxy: {
+      '/api/zora': {
+        target: 'https://api.zora.co',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/zora/, '/universal/graphql'),
+      }
+    }
+  }
 })
