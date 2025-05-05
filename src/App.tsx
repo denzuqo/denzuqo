@@ -11,7 +11,7 @@ function App() {
 
           <div className='flex flex-col lg:flex-row pt-5'>
             <div className='flex-shrink-0'>
-              <img src='https://pbs.twimg.com/profile_images/1908620422373138434/am80mWNg_400x400.jpg' className='rounded-xl w-[100px]'/>
+              <img src='https://pbs.twimg.com/profile_images/1919282891886075904/VVNnn7mK_400x400.jpg' className='rounded-xl w-[100px]'/>
             </div>
 
             <div className='lg:pl-3'>
