@@ -7,7 +7,7 @@ import ZoraAirdropChecker from './pages/web3/airdrop/checker/ZoraAirdropChecker'
 
 const rawRoutes = [
   { path: '/', element: <App /> },
-  { path: '/.well-known/atproto-did', element: 'did:plc:52q5abysaaku2u73euojjjgb' },
+  { path: '/.well-known/atproto-did', element: <div>did:plc:52q5abysaaku2u73euojjjgb</div> },
   { path: '/tools/aes', element: <AESTools /> },
   { path: '/sl/:code', element: <ShortLInk /> },
   { path: '/web3/airdrop/checker/zora', element: <ZoraAirdropChecker /> },
