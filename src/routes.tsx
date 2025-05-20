@@ -1,4 +1,4 @@
-import App from './App';
+// import App from './App';
 import AESTools from './pages/tools/AESTools';
 import Error from './pages/PageError';
 import ShortLInk from './pages/ShortLink';
