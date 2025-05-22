@@ -69,7 +69,7 @@ const Maintenance: React.FC = () => {
         }
       }
 
-      time += 0.008;
+      time += 0.005;
       requestAnimationFrame(draw);
     };
 
@@ -100,11 +100,81 @@ const Maintenance: React.FC = () => {
       />
 
       <div
-        className="flex justify-center items-center min-h-screen relative z-10 text-white text-2xl font-mono text-[clamp(2rem,10vw,9rem)] p-5">
-            <div>
-                Under Maintenis!
+        className="container mt-8 mx-auto z-10 text-white text-2xl font-mono text-[clamp(2rem,10vw,9rem)] p-5">
+          <div className="flex flex-col p-5 items-center">
+              <img src='https://pbs.twimg.com/profile_images/1925158023057846272/j2XhJgJ6_400x400.jpg' className='rounded-xl w-[250px]'/>
+                <p className='text-5xl font-bold pt-3 pt-8 lg:text-left'>Denzuqo</p>
+          </div>
+          <div className="flex flex-col md:flex-row gap-4 p-5">
+          
+            <div className='p-5 bg-blue-600/25 backdrop-blur-sm rounded-xl border border-blue-600'>
+              <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>About</p>
+              <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>Here, you can get to know more about me. I’m from Indonesia, specifically from West Java, and I was born during the economic crisis in the era of President Suharto.</p>
+              <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>I have a deep passion for technology. My hobbies revolve around learning and coding — whether it's Object-Oriented Programming, Functional Programming, or working with native methods. Recently, I've been exploring the fast-growing fields of Web3 and Artificial Intelligence (AI).</p>
             </div>
+
+            <div className='p-5 bg-red-600/25 backdrop-blur-sm rounded-xl border border-red-600'>
+                <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>Principle</p>
+                <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>For me, technology is more than just an interest — it's a way to understand the world and shape the future. Thank you for visiting, and I hope you find something valuable or inspiring here!</p>
+            </div>
+          </div>
+
+          <div className="flex flex-row w-full p-5 gap-4 pt-8 items-center">
+            <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>
+              Skill
+            </p>
+            <hr className="w-full border-t-4"/>
+          </div>
+
+          <div className="flex flex-wrap gap-4 p-5 pt-0 w-full">
+            {[
+              { img: "https://img.icons8.com/?size=40&id=lS8MFGKJuQ0-&format=png&color=ffffff", label: "Full Stack Developer" },
+              { img: "https://img.icons8.com/?size=40&id=18823&format=png&color=ffffff", label: "Artificial Intelligence" },
+              { img: "https://img.icons8.com/?size=40&id=22852&format=png&color=ffffff", label: "Blockchain Developer" },
+              { img: "https://img.icons8.com/?size=40&id=33284&format=png&color=ffffff", label: "DevOPS" },
+              { img: "https://img.icons8.com/?size=40&id=16135&format=png&color=ffffff", label: "Cyber Security" }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex-auto items-center p-3 bg-[#F85225]/25 backdrop-blur-sm rounded-xl min-w-[200px] border border-[#F85225]"
+              >
+                <img src={item.img} alt={item.label} />
+                <p className="text-nowrap text-[clamp(1rem,10vw,1.2rem)] font-bold pt-3">{item.label}</p>
+              </div>
+            ))}
+          </div>
+
+
+
+          <div className="flex flex-row w-full p-5 gap-4 pt-8 items-center">
+            <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>
+              Social
+            </p>
+            <hr className="w-full border-t-4"/>
+          </div>
+
+          <div className="flex flex-wrap gap-4 p-5 pt-0 w-full">
+            {[
+              { img: "https://img.icons8.com/?size=40&id=20675&format=png&color=ffffff", label: "Github",
+                link: "https://github.com/denzuqo"
+              },
+              { img: "https://img.icons8.com/?size=40&id=7WVpwSy9g6hn&format=png&color=ffffff", label: "TwitterX",
+                link: "https://x.com/denzuqo"
+              }
+            ].map((item, i) => (
+              <a href={item.link} target="_blank" className="flex-auto items-center ">
+                <div
+                  key={i}
+                  className="p-3 bg-[#F85225]/25 backdrop-blur-sm rounded-xl min-w-[200px] border border-[#F85225]"
+                >
+                  <img src={item.img} alt={item.label} />
+                  <p className="text-nowrap text-[clamp(1rem,10vw,1.2rem)] font-bold pt-3">{item.label}</p>
+                </div>
+              </a>
+            ))}
+          </div>
       </div>
+      <div className="pb-25"></div>
     </>
   );
 };
