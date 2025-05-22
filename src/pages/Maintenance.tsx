@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
 const Maintenance: React.FC = () => {
-
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -99,82 +98,87 @@ const Maintenance: React.FC = () => {
         }}
       />
 
-      <div
-        className="container mt-8 mx-auto z-10 text-white text-2xl font-mono text-[clamp(2rem,10vw,9rem)] p-5">
-          <div className="flex flex-col p-5 items-center">
-              <img src='https://pbs.twimg.com/profile_images/1925158023057846272/j2XhJgJ6_400x400.jpg' className='rounded-xl w-[250px]'/>
-                <p className='text-5xl font-bold pt-3 pt-8 lg:text-left'>Denzuqo</p>
-          </div>
-          <div className="flex flex-col md:flex-row gap-4 p-5">
-          
-            <div className='p-5 bg-blue-600/25 backdrop-blur-sm rounded-xl border border-blue-600'>
-              <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>About</p>
-              <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>Here, you can get to know more about me. I’m from Indonesia, specifically from West Java, and I was born during the economic crisis in the era of President Suharto.</p>
-              <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>I have a deep passion for technology. My hobbies revolve around learning and coding — whether it's Object-Oriented Programming, Functional Programming, or working with native methods. Recently, I've been exploring the fast-growing fields of Web3 and Artificial Intelligence (AI).</p>
-            </div>
+      <main className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12 text-white font-mono mb-10">
+        <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-3xl p-8 max-w-5xl w-full text-center">
+          <img
+            src="https://pbs.twimg.com/profile_images/1925158023057846272/j2XhJgJ6_400x400.jpg"
+            alt="Profile"
+            className="w-32 h-32 rounded-full mx-auto border-4 border-white/30"
+          />
+          <h1 className="text-4xl font-bold mt-4">Denzuqo</h1>
+          <p className="mt-2 text-lg text-white/80">
+            Technologist | Full Stack Developer | AI & Web3 Enthusiast
+          </p>
+        </div>
 
-            <div className='p-5 bg-red-600/25 backdrop-blur-sm rounded-xl border border-red-600'>
-                <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>Principle</p>
-                <p className='text-[clamp(1rem,10vw,1rem)] font-bold text-justify lg:text-left pt-4'>For me, technology is more than just an interest — it's a way to understand the world and shape the future. Thank you for visiting, and I hope you find something valuable or inspiring here!</p>
-            </div>
-          </div>
-
-          <div className="flex flex-row w-full p-5 gap-4 pt-8 items-center">
-            <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>
-              Skill
+        <section className="grid md:grid-cols-2 gap-6 w-full max-w-5xl pt-6">
+          <div className="p-6 rounded-xl bg-blue-500/20 backdrop-blur-md border border-blue-400">
+            <h2 className="text-3xl font-semibold mb-4">About</h2>
+            <p className="text-justify">
+              I’m from Indonesia, specifically from West Java, born during the economic crisis of Suharto's era. Passionate about tech — from OOP to functional programming, Web3, and AI.
             </p>
-            <hr className="w-full border-t-4"/>
           </div>
 
-          <div className="flex flex-wrap gap-4 p-5 pt-0 w-full">
-            {[
-              { img: "https://img.icons8.com/?size=40&id=lS8MFGKJuQ0-&format=png&color=ffffff", label: "Full Stack Developer" },
-              { img: "https://img.icons8.com/?size=40&id=18823&format=png&color=ffffff", label: "Artificial Intelligence" },
-              { img: "https://img.icons8.com/?size=40&id=22852&format=png&color=ffffff", label: "Blockchain Developer" },
-              { img: "https://img.icons8.com/?size=40&id=33284&format=png&color=ffffff", label: "DevOPS" },
-              { img: "https://img.icons8.com/?size=40&id=16135&format=png&color=ffffff", label: "Cyber Security" }
-            ].map((item, i) => (
+          <div className="p-6 rounded-xl bg-green-500/20 backdrop-blur-md border border-green-400">
+            <h2 className="text-3xl font-semibold mb-4">Principle</h2>
+            <p className="text-justify">
+              Technology isn't just a hobby — it's a lens to understand and shape the future. Hope you find inspiration here!
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-12 w-full max-w-5xl">
+          <h2 className="text-4xl font-bold mb-4 border-b pb-2">Skills</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 backdrop-blur-md">
+            {["Full Stack Developer", "Artificial Intelligence", "Blockchain Developer", "DevOPS", "Cyber Security"].map((label, index) => (
               <div
-                key={i}
-                className="flex-auto items-center p-3 bg-[#F85225]/25 backdrop-blur-sm rounded-xl min-w-[200px] border border-[#F85225]"
+                key={index}
+                className="p-4 bg-purple-500/20 border border-purple-400 rounded-xl flex flex-col items-center text-center"
               >
-                <img src={item.img} alt={item.label} />
-                <p className="text-nowrap text-[clamp(1rem,10vw,1.2rem)] font-bold pt-3">{item.label}</p>
+                <img
+                  src={`https://img.icons8.com/?size=40&id=${[
+                    "lS8MFGKJuQ0-",
+                    "18823",
+                    "22852",
+                    "33284",
+                    "16135"
+                  ][index]}&format=png&color=ffffff`}
+                  alt={label}
+                />
+                <span className="mt-3 text-lg font-semibold">{label}</span>
               </div>
             ))}
           </div>
+        </section>
 
-
-
-          <div className="flex flex-row w-full p-5 gap-4 pt-8 items-center">
-            <p className='text-[clamp(2rem,10vw,2rem)] font-bold pt-3 lg:pt-0 pb-3 lg:pb-0 lg:text-left'>
-              Social
-            </p>
-            <hr className="w-full border-t-4"/>
-          </div>
-
-          <div className="flex flex-wrap gap-4 p-5 pt-0 w-full">
+        <section className="mt-12 w-full max-w-5xl">
+          <h2 className="text-4xl font-bold mb-4 border-b pb-2">Social</h2>
+          <div className="grid grid-cols-2 gap-4 backdrop-blur-md">
             {[
-              { img: "https://img.icons8.com/?size=40&id=20675&format=png&color=ffffff", label: "Github",
-                link: "https://github.com/denzuqo"
+              {
+                label: "Github",
+                img: "https://img.icons8.com/?size=40&id=20675&format=png&color=ffffff",
+                link: "https://github.com/denzuqo",
               },
-              { img: "https://img.icons8.com/?size=40&id=7WVpwSy9g6hn&format=png&color=ffffff", label: "TwitterX",
-                link: "https://x.com/denzuqo"
-              }
-            ].map((item, i) => (
-              <a href={item.link} target="_blank" className="flex-auto items-center ">
-                <div
-                  key={i}
-                  className="p-3 bg-[#F85225]/25 backdrop-blur-sm rounded-xl min-w-[200px] border border-[#F85225]"
-                >
-                  <img src={item.img} alt={item.label} />
-                  <p className="text-nowrap text-[clamp(1rem,10vw,1.2rem)] font-bold pt-3">{item.label}</p>
-                </div>
+              {
+                label: "TwitterX",
+                img: "https://img.icons8.com/?size=40&id=7WVpwSy9g6hn&format=png&color=ffffff",
+                link: "https://x.com/denzuqo",
+              },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                target="_blank"
+                className="p-4 bg-cyan-500/20 border border-cyan-400 rounded-xl flex flex-col items-center hover:bg-cyan-600/30 transition"
+              >
+                <img src={item.img} alt={item.label} />
+                <span className="mt-2 font-semibold">{item.label}</span>
               </a>
             ))}
           </div>
-      </div>
-      <div className="pb-25"></div>
+        </section>
+      </main>
     </>
   );
 };
